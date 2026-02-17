@@ -107,6 +107,12 @@ MONGODB_URI=mongodb://localhost:27017/jobpilot
 JWT_SECRET=your_secret_key
 ```
 
+Create `client/.env.local`:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5001/api
+```
+
 ### 4. Start MongoDB
 
 ```bash
