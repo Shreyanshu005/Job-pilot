@@ -12,6 +12,7 @@ import {
     FiUsers,
     FiChevronLeft,
     FiChevronRight,
+    FiCheckCircle,
 } from 'react-icons/fi';
 import api from '@/lib/api';
 import Shimmer from '@/components/ui/Shimmer';
@@ -132,11 +133,11 @@ export default function MyJobsPage() {
                     <div className="overflow-x-auto pb-4">
                         <motion.table className="w-full border-collapse min-w-[800px]" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                             <thead>
-                                <tr>
-                                    <th className="text-left py-2 px-3 text-[15px] font-medium text-gray-500 border-b border-[#E5E5E6] whitespace-nowrap w-[50%]">Jobs</th>
-                                    <th className="text-left py-2 px-3 text-[15px] font-medium text-gray-500 border-b border-[#E5E5E6] whitespace-nowrap w-[16%]">Status</th>
-                                    <th className="text-left py-2 px-3 text-[15px] font-medium text-gray-500 border-b border-[#E5E5E6] whitespace-nowrap w-[16%]">Applications</th>
-                                    <th className="text-left py-2 px-3 text-[15px] font-medium text-gray-500 border-b border-[#E5E5E6] whitespace-nowrap text-right pr-6 w-[18%]">Actions</th>
+                                <tr className="bg-[#F2F2F3] text-left h-[38px]">
+                                    <th className="p-3 rounded-l-[10px] text-[15px] font-medium text-gray-500 pl-6 whitespace-nowrap w-[50%]">Jobs</th>
+                                    <th className="p-3 text-[15px] font-medium text-gray-500 whitespace-nowrap w-[16%]">Status</th>
+                                    <th className="p-3 text-[15px] font-medium text-gray-500 whitespace-nowrap w-[16%]">Applications</th>
+                                    <th className="p-3 rounded-r-[10px] text-[15px] font-medium text-gray-500 whitespace-nowrap text-right pr-6 w-[18%]">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -153,11 +154,15 @@ export default function MyJobsPage() {
                                             <div className="text-[14px] text-gray-400">{job.type} · {formatDeadline(job)}</div>
                                         </td>
                                         <td className="p-4 border-b border-gray-100 align-middle whitespace-nowrap">
-                                            <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[15px] font-medium ${job.status === 'Active' ? 'text-green-500 bg-green-500/10' : 'text-red-500 bg-red-500/10'
-                                                }`}>
-                                                <span className={`w-2 h-2 rounded-full ${job.status === 'Active' ? 'bg-green-500' : 'bg-red-500'}`} />
-                                                {job.status}
-                                            </span>
+                                            {job.status === 'Active' ? (
+                                                <div className="flex items-center gap-2 text-green-500 font-medium text-[15px]">
+                                                    <FiCheckCircle className="text-xl" /> Active
+                                                </div>
+                                            ) : (
+                                                <div className="flex items-center gap-2 text-red-500 font-medium text-[15px]">
+                                                    <FiCheckCircle className="text-xl" /> {job.status}
+                                                </div>
+                                            )}
                                         </td>
                                         <td className="p-4 border-b border-gray-100 align-middle whitespace-nowrap">
                                             <div className="flex items-center gap-1.5 text-gray-500 text-[15px]">
@@ -167,7 +172,9 @@ export default function MyJobsPage() {
                                         <td className="p-4 border-b border-gray-100 align-middle whitespace-nowrap">
                                             <div className="flex items-center justify-end gap-4">
                                                 <Link href={`/dashboard/jobs/${job._id}`}>
-                                                    <button className="py-1.5 px-4 border-[1.5px] border-primary rounded-full text-primary text-[15px] font-medium bg-white hover:bg-primary hover:text-white transition cursor-pointer">View Job</button>
+                                                    <button className="py-3 px-8 rounded-full text-primary text-[15px] font-medium bg-[#E5E6FB] hover:bg-[#d6d7fc] transition cursor-pointer border-none">
+                                                        View Job
+                                                    </button>
                                                 </Link>
                                                 <div className="relative action-menu-container">
                                                     <button
